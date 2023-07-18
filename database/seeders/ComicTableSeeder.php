@@ -240,7 +240,7 @@ class ComicTableSeeder extends Seeder
                 "series" => $comic["series"],
                 "sale_date" => $comic["sale_date"],
                 "type" => $comic["type"]
-            ])
+            ]);
         }
     }
 }
