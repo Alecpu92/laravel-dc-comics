@@ -15,6 +15,8 @@ class MainController extends Controller
         return view("home", compact('comics'));
     }
 
+
+
     public function show($id) {
 
         $comic = Comic :: findOrFail($id);
@@ -29,7 +31,16 @@ class MainController extends Controller
 
     public function store(Request $request) {
 
-        $data = $request -> all();
+        $data = $request -> validate ([
+            'title' => 'required|unique:posts|max:255',
+            'description' => 'required|unique:posts|max:255',
+            'thumb' => 'required|unique:posts|max:255',
+            'price' => 'required|unique:posts|max:255',
+            'series' => 'required|unique:posts|max:255',
+            'sale_date' => 'required|unique:posts|max:255',
+            'type' => 'required|unique:posts|max:255'
+            
+        ]);
 
         $comic = Comic :: create($data);
 
