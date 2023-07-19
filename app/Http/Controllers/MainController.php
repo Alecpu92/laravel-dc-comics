@@ -31,16 +31,35 @@ class MainController extends Controller
 
         $data = $request -> all();
 
-        $comic = Comic :: create([
-            "title" => $data["title"],
-            "description" => $data["description"],
-            "thumb" => $data["thumb"],
-            "price" => $data["price"],
-            "series" => $data["series"],
-            "sale_date" => $data["sale_date"],
-            "type" => $data["type"]
-        ]);
+        $comic = Comic :: create($data);
 
         return redirect() -> route('show', $comic -> id);
+    }
+
+    public function edit($id) {
+
+        $comic = Comic :: findOrFail($id);
+
+        // return view('edit', compact('comic'));
+        return view('edito', ['comic' => $comic]);
+    }
+    public function update(Request $request, $id) {
+
+        $data = $request -> all();
+
+        $comic = Comic :: findOrFail($id);
+
+        $comic -> update($data);
+
+        return redirect() -> route('show', $comic -> id);
+    }
+
+    public function delete($id) {
+
+        $comic = Comic :: findOrFail($id);
+
+        $comic -> delete();
+
+        return redirect() -> route('index');
     }
 }
